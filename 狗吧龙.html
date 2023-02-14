@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        padding: 20px;
+        background-color: white;
+    }
+    #game{
+        width: 500px;
+        height: 200px;
+        border: 1px solid black;
+        position: relative; 
+    }
+    #dion{
+        width: 20px;
+        height: 50px;
+        background-color: red;
+        position: absolute;
+        transition: 0.5S;
+        bottom: 0px;
+    }
+    .jumpClass{
+        animation: jump 0.5s infinite;
+    }
+    @keyframes jump{
+        0%{
+            bottom: 0px;
+        }
+        30%{
+            bottom: 100px;
+        }
+        70%{
+            bottom: 100px;
+        }
+        100%{
+            bottom: 0px;
+        }
+    }
+    #block{
+        width: 20px;
+        height: 20px;
+        background-color: blue;
+        position: absolute;
+        bottom: 0px;
+        left: 450px;
+        animation: block 2s linear infinite;
+        transition: 2S;
+    }
+    @keyframes block{
+        0%{
+            left: 450px;
+        }
+        100%{
+            left: -20px;
+        }
+    }
+</style>
+<body>
+    <div id="game">
+        <div id="dion"></div>
+        <div id="block"></div>
+    </div>
+</body>
+<script>
+    const dion=document.querySelector('#dion');
+    const block=document.querySelector('#block');
+    window.addEventListener('keydown',e=>{
+        console.log(e)
+        if(e.code=='Space'){
+            console.log('键盘空格按下')
+            dion.classList.add('jumpClass')
+            setTimeout(()=>{
+                dion.classList.remove('jumpClass')
+            },500)
+        }
+    });
+    setInterval(function(){
+        const dionb=parseFloat(getComputedStyle(dion).getPropertyValue('bottom'))
+        const blockb=parseFloat(getComputedStyle(block).getPropertyValue('left'))
+        if(blockb<20&&blockb>-20&&dionb<=20){
+            alert('GG')
+        }
+    },10)
+</script>
+</html>
